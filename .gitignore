@@ -15,8 +15,7 @@ pids/
 *.seed
 *.pid.lock
 
-# dotenv environment variables file
-.env
+
 
 # Coverage directory used by coverage tools like istanbul/jest
 coverage/
