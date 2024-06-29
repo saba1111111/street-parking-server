@@ -1,0 +1,27 @@
+ # Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# dotenv environment variables file
+.env
+
+# Coverage directory used by coverage tools like istanbul/jest
+coverage/
+
+# Build output directories
+build/
+dist/
+
