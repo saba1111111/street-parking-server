@@ -2,6 +2,8 @@ import { DataTypes, Model, Sequelize } from "sequelize";
 import sequelize from "../db-client";
 import { ParkingHistoryStatuses } from "../../parkingHistory/constants";
 import { IParkingHistory } from "../../parkingHistory/interfaces";
+import { ILocation } from "libs/places/interfaces";
+import LocationsModel from "./locations.model";
 
 class ParkingHistoryModel
   extends Model<IParkingHistory>
@@ -16,6 +18,7 @@ class ParkingHistoryModel
   public amount!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+  public readonly location?: ILocation;
 }
 
 ParkingHistoryModel.init(
@@ -81,5 +84,10 @@ ParkingHistoryModel.init(
     tableName: "parking_history",
   }
 );
+
+ParkingHistoryModel.belongsTo(LocationsModel, {
+  foreignKey: "locationId",
+  as: "location",
+});
 
 export default ParkingHistoryModel;

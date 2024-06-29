@@ -6,11 +6,25 @@ import {
   IParkingHistoryRepository,
   IStartParkingRepositoryData,
 } from "../interfaces";
+import LocationsModel from "../../../libs/database/models/locations.model";
 
 @injectable()
 export class ParkingHistorySequelizeRepository
   implements IParkingHistoryRepository
 {
+  public findAll(userId: number) {
+    return ParkingHistoryModel.findAll({
+      where: { userId },
+      include: [
+        {
+          model: LocationsModel,
+          as: "location",
+          required: true,
+        },
+      ],
+    });
+  }
+
   public create(input: IStartParkingRepositoryData): Promise<IParkingHistory> {
     return ParkingHistoryModel.create(input as IParkingHistory);
   }

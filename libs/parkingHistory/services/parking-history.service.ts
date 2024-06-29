@@ -7,6 +7,7 @@ import {
 import {
   IFindParkingItemData,
   IFinishParkingData,
+  IParkingHistory,
   IParkingHistoryRepository,
   IStartParkingData,
 } from "../interfaces";
@@ -57,7 +58,7 @@ export class ParkingHistoryService {
         userId: input.userId,
       });
 
-      return this.responseHandler.error({
+      return this.responseHandler.success({
         message: "Successfully start new parking.",
         data: newParking,
       });
@@ -119,6 +120,32 @@ export class ParkingHistoryService {
       }
 
       return this.responseHandler.error({
+        message,
+      });
+    }
+  }
+
+  public async findAll(userId: number) {
+    try {
+      const parkings = await this.parkingHistoryRepository.findAll(userId);
+
+      if (!parkings) {
+        return this.responseHandler.error({
+          message: "parkings not found.",
+        });
+      }
+
+      return this.responseHandler.success({
+        message: "Successfully fetched parkings.",
+        data: parkings,
+      });
+    } catch (error) {
+      let message = "An error occurred while fetching parkings.";
+      if (error instanceof Error) {
+        message = error.message;
+      }
+
+      return this.responseHandler.error<IParkingHistory>({
         message,
       });
     }

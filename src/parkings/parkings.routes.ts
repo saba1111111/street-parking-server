@@ -6,6 +6,8 @@ import { validateParking } from "../../libs/parkingHistory/validations";
 const router = express.Router();
 const parkingsController = container.get(ParkingsController);
 
+router.get("/:id", parkingsController.getParkings.bind(parkingsController));
+
 router.post(
   "/start",
   validateParking,

@@ -9,4 +9,5 @@ export interface IParkingHistoryRepository {
     id: number,
     updateData: Partial<IParkingHistory>
   ): Promise<IParkingHistory | null>;
+  findAll(userId: number): Promise<IParkingHistory[]>;
 }
